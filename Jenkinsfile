@@ -30,9 +30,11 @@ pipeline{
                 script {
             		docker.withRegistry( '', registryCredential ) {
             		dockerImage.push()
-          }
+          		}
+               }
         }
      }
+    }
 }
 //        stage('UNIT testing'){
 //            steps{
