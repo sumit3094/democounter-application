@@ -22,6 +22,8 @@ pipeline{
                 script{
 	            sh "pwd"
                     customImage = docker.build registry + ":$BUILD_NUMBER"
+	            echo "Image Name is"
+                    echo "${customImage}"
                 }
             }
         }
