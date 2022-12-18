@@ -6,7 +6,7 @@ pipeline{
     } 
     environment{
         
-        registry = "demoapp.eastus.cloudapp.azure.com:8085/democounter"
+        image = "demoapp.eastus.cloudapp.azure.com:8085/democounter"
         registryCredential = 'docker-nexus'        
     }
     stages {
@@ -21,17 +21,17 @@ pipeline{
            steps{
                 script{
 	            sh "pwd"
-                    customImage = docker.build registry + ":$BUILD_NUMBER"
+                    customImage = docker.build image + ":$BUILD_NUMBER"
 	            echo "Image Name is"
-                    echo "${customImage}"
+                    echo "customImage"
                 }
             }
         }
-	stage('Deploy Image'){
+	stage('Push Image'){
 	   steps{
                 script {
             		docker.withRegistry( 'http://demoapp.eastus.cloudapp.azure.com:8085', registryCredential ) {
-            		dockerImage.push()
+            		dockerImage.push(customeImage)
           		}
                }
         }
