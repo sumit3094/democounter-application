@@ -28,7 +28,7 @@ pipeline{
 	stage('Deploy Image'){
 	   steps{
                 script {
-            		docker.withRegistry( '', registryCredential ) {
+            		docker.withRegistry( 'demoapp.eastus.cloudapp.azure.com:8085', registryCredential ) {
             		dockerImage.push()
           		}
                }
