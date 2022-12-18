@@ -4,6 +4,11 @@ pipeline{
         maven 'mavenlatest' 
         jdk 'javademo' 
     } 
+    environment{
+        
+        registry = "demoapp.eastus.cloudapp.azure.com:8085/democounter"
+        registryCredential = 'docker-nexus'        
+    }
     stages {
         stage('Git Checkout'){
             steps{
@@ -16,10 +21,12 @@ pipeline{
            steps{
                 script{
 	            sh "pwd"
-                    def customImage = docker.build("my-image:${env.BUILD_ID}")
+                    customImage = docker.build registry + ":$BUILD_NUMBER"
                 }
             }
         }
+	//stage(''){
+        // }
      }
 }
 //        stage('UNIT testing'){
