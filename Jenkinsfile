@@ -20,21 +20,21 @@ pipeline{
             }//steps
         }stage1
 
-        stage('UNIT testing'){
-            steps{
-                script{
-                    sh 'mvn test'
-                }
-           }
-        }//stage
+        //stage('UNIT testing'){
+        //    steps{
+        //        script{
+        //            sh 'mvn test'
+        //        }
+        //   }
+        //}//stage
 
-	stage('Integration testing'){
-            steps{
-                script{
-                    sh 'mvn verify -DskipUnitTests'
-                }
-            }
-        }
+	//stage('Integration testing'){
+        //    steps{
+        //        script{
+        //            sh 'mvn verify -DskipUnitTests'
+        //        }
+        //    }
+        //}
   
 	stage('Static code analysis'){
             steps{
