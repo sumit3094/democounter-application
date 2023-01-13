@@ -8,6 +8,13 @@ pipeline {
                 }
             }
         }
+        //stage('Install Scanning Tool'){
+        //    steps {
+        //        script{
+        //            sh 'pip3 install whispers'     
+        //        }  
+        //    }
+       // }   
         stage('Scan Source Code'){
             steps {
                 script{
