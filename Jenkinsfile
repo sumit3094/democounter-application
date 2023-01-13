@@ -8,5 +8,13 @@ pipeline {
                 }
             }
         }
-    }
-}   
+        stage('Scan Source Code'){
+            steps {
+                script{
+                    sh 'pwd'
+                    sh 'whispers . | jq'
+                }
+            }
+        }
+    } 
+}    
