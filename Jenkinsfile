@@ -12,7 +12,14 @@ pipeline{
                 		}//script
             		}//steps
         	}stage1 
-	stage('Static code analysis'){
+		stage('Scan Source Code For Hard Coded Values'){
+			steps{
+				script{
+					sh 'whispers . | jq'
+				}
+			}
+		}
+		stage('Static code analysis'){
         	steps{
                 	script{
 				//withSonarQubeEnv(credentialsId: 'sonarserver') {
