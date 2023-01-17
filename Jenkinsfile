@@ -26,7 +26,7 @@ pipeline {
         stage('Dependency Check'){
             steps {
                 script{
-                    dependencyCheck additionalArguments: 'scan="." --format HTML'
+                    dependencyCheck additionalArguments: '--scan="." --format HTML', odcInstallation: 'owasp-dependency-tool'
                 }
             }
         }
