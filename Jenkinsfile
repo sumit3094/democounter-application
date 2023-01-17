@@ -27,14 +27,14 @@ pipeline {
             steps {
                 script{
                     dependencyCheck additionalArguments: '--scan="." --format HTML', odcInstallation: 'owasp-dependency-tool'
-                    archiveArtifacts allowEmptyArchive: true, artifacts: '${WORKSPACE}/dependency-check-report.xml', onlyIfSuccessful: true
+                  //  archiveArtifacts allowEmptyArchive: true, artifacts: '${WORKSPACE}/dependency-check-report.xml', onlyIfSuccessful: true
                 }
             }
         }
     }
- //    post {
- //       always {
- //          dependencyCheckPublisher pattern: 'build/reports/dependency-check-report.xml'
- //       }
- //   }
+     post {
+        always {
+           dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+        }
+    }
 }    
