@@ -23,5 +23,12 @@ pipeline {
                 }
             }
         }
+        stage('Dependency Check'){
+            steps {
+                script{
+                    dependencyCheck additionalArguments: 'scan="." --format HTML'
+                }
+            }
+        }
     } 
 }    
