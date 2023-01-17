@@ -35,7 +35,7 @@ pipeline {
      post {
         always {
            //dependencyCheckPublisher pattern: 'dependency-check-report.xml'
-            archiveArtifacts artifacts: 'dependency-check-report.html', onlyIfSuccessful: true
+            archiveArtifacts artifacts: 'dependency-check-report.json', onlyIfSuccessful: true
         }
     }
 }    
