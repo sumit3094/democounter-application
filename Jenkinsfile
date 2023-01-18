@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    tools {
+        maven 'mavenlatest'
+        jdk 'javademo'
+    }
     stages {
         stage('Git Checkout') {
             steps {
@@ -19,9 +23,9 @@ pipeline {
         stage('Static code analysis'){
             steps{
                 script{
-                    //withSonarQubeEnv(credentialsId: 'sonarserver') {
-                    //sh 'mvn clean package sonar:sonar'
-                    //}
+                    withSonarQubeEnv(credentialsId: 'sonarserver') {
+                    sh 'mvn clean package sonar:sonar'
+                    }
                     withSonarQubeEnv() {
                     sh "${maven}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=test-1"
                     }
