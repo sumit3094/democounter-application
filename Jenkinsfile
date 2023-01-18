@@ -4,6 +4,12 @@ pipeline {
         maven 'mavenlatest'
         jdk 'javademo'
     }
+    environment{
+        imageName = "democounter"
+        registryCredential = 'docker-nexus'
+        registry = "demoapp.eastus.cloudapp.azure.com:8085"
+        dockerImage = ''    
+    }		
     stages {
         stage('Git Checkout') {
             steps {
@@ -26,13 +32,15 @@ pipeline {
                         }
                 }
             }
-       }
-       stage('Quality Gate Status'){
+       }//stage
+       stage('Docker build'){
            steps{
-              script{
-                   waitForQualityGate abortPipeline: false, credentialsId: 'latest-sonar'
-                    }
+                script{
+	            sh "pwd"
+                    customImage = docker.build imageName + ":$BUILD_NUMBER"
                 }
-	   }//stage
+            }
+        }//stage
+
     }
 }    
