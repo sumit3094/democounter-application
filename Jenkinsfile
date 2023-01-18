@@ -37,8 +37,9 @@ pipeline {
                 script {
              	    docker.withRegistry([url: "", registryCredential]) {
                     dockerImage.push(customeImage)
-          		}
+          	    }
                }
-        }
+           }
+	}
     }
 }    
