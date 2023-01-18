@@ -24,7 +24,8 @@ pipeline {
            steps{
                 script{
 	            sh "pwd"
-                    customImage = docker.build imageName + ":$BUILD_NUMBER"
+                    //customImage = docker.build imageName + ":$BUILD_NUMBER"
+		    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
                 }
             }
         }//stage
@@ -40,7 +41,7 @@ pipeline {
              	    	//docker.withRegistry([url: "", registryCredential]) {}
 		    	//withDockerRegistry([ credentialsId: "mydockerhub", url: "" ])
 				docker.withRegistry( '', registryCredential ) { 
-                    		dockerImage.push(customeImage)
+                    		dockerImage.push()
 				}
             		}
 		}
