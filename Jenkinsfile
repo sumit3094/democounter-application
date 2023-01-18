@@ -26,11 +26,19 @@ pipeline {
                    sh 'mvn test'
                }
            }
-       }//stage 
+       } 
+       stage('Integration testing'){
+            steps{
+                script{
+                   sh 'mvn verify -DskipUnitTests'
+                }
+            }
+       }
+           
        stage('Static code analysis'){
             steps{
                 script{
-                    withSonarQubeEnv('sonarserver') {
+                    withSonarQubeEnv(credentialsId: 'sonarserver') {
                     sh 'mvn clean package sonar:sonar'
                     }
                         timeout(time: 1, unit: 'HOURS'){
