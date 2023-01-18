@@ -1,11 +1,8 @@
 pipeline {
-  agent {
-    docker { image 'node:16-alpine' }	
-  }	
+  agent any	
     tools {
         maven 'mavenlatest'
-        jdk 'javademo'
-	//docker 'docker-tool'
+        jdk 'javademo'	
     }
     environment{
         imageName = "democounter"
