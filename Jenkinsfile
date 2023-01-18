@@ -6,7 +6,7 @@ pipeline {
     }
     environment{
         imageName = "democounter"
-        registryCredential = 'docker-nexus'
+        registryCredential = 'mydockerhub'
         registry = "sumit3094/jenkins-demo"
         dockerImage = ''    
     }		
@@ -41,6 +41,18 @@ pipeline {
                 }
             }
         }//stage
-
+	stage('DockerHub Login') {
+        	steps {
+        	   sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+      		}
+    	}
+	stage('Push Image'){
+	   steps{
+                script {
+             	    docker.withRegistry([url: "", registryCredential]) {
+                    dockerImage.push(customeImage)
+          		}
+               }
+        }
     }
 }    
