@@ -74,5 +74,18 @@ pipeline {
                		}
 		}
 	}//stage
+	stage('Software Composition Analysis'){
+            steps {
+                script{
+                    dependencyCheck additionalArguments: '--scan="." --format JSON', odcInstallation: 'owasp-dependency-tool'
+		}
+	    }
+	}//stage	
     }//stages
+    		post {
+        		always {
+           		//dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+            		archiveArtifacts artifacts: 'dependency-check-report.json', onlyIfSuccessful: true
+        		}
+    		}
 }//pipeline
