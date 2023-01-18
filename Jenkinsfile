@@ -28,17 +28,18 @@ pipeline {
                 }
             }
         }//stage
-	stage('DockerHub Login') {
-        	steps {
-        	   sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-		   echo 'Login Completed' 
-      		}
-    	}
+	//stage('DockerHub Login') {
+        //	steps {
+        //	   sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+	//	   echo 'Login Completed' 
+      	//	}
+    	//}
 	stage('Push Image'){
 		steps{
                 	script {
              	    	//docker.withRegistry([url: "", registryCredential]) {}
-		    	withDockerRegistry([ credentialsId: "mydockerhub", url: "" ])
+		    	//withDockerRegistry([ credentialsId: "mydockerhub", url: "" ])
+			docker.withRegistry( '', registryCredential ) { 
                     	dockerImage.push(customeImage)
 			}
             	}
