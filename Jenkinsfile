@@ -38,7 +38,7 @@ pipeline {
        stage('Static code analysis'){
             steps{
                 script{
-                    withSonarQubeEnv(credentialsId: 'sonarserver') {
+                    withSonarQubeEnv('sonarserver') {
                     sh 'mvn clean package sonar:sonar'
                     }
                         timeout(time: 1, unit: 'HOURS'){
