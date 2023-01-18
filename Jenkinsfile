@@ -39,10 +39,11 @@ pipeline {
                 	script {
              	    	//docker.withRegistry([url: "", registryCredential]) {}
 		    	//withDockerRegistry([ credentialsId: "mydockerhub", url: "" ])
-			docker.withRegistry( '', registryCredential ) { 
-                    	dockerImage.push(customeImage)
-			}
-            	}
+				docker.withRegistry( '', registryCredential ) { 
+                    		dockerImage.push(customeImage)
+				}
+            		}
+		}
 	}
     }
 }    
