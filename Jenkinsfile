@@ -10,7 +10,7 @@ pipeline {
     environment{
         imageName = "democounter"
         registryCredential = 'docker-nexus'
-        registry = "demoapp.eastus.cloudapp.azure.com:8085"
+        registry = "sumit3094/jenkins-demo"
         dockerImage = ''    
     }		
     stages {
