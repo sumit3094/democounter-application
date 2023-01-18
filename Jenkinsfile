@@ -20,7 +20,7 @@ pipeline {
             }
         }  
        
-       stage('Docker build'){
+		stage('Docker build'){
            steps{
                 script{
 	            sh "pwd"
@@ -28,20 +28,19 @@ pipeline {
                 }
             }
         }//stage
-	stage('DockerHub Login') {
+		stage('DockerHub Login') {
         	steps {
         	   sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
       		}
     	}
 	stage('Push Image'){
-	   steps{
-                script {
-             	    //docker.withRegistry([url: "", registryCredential]) {
-		    withDockerRegistry([ credentialsId: "mydockerhub", url: "" ])
-                    dockerImage.push(customeImage)
-          	    }
-               }
-           }
+		steps{
+                	script {
+             	    	//docker.withRegistry([url: "", registryCredential]) {}
+		    	withDockerRegistry([ credentialsId: "mydockerhub", url: "" ])
+                    	dockerImage.push(customeImage)
+			}
+            	}
 	}
     }
 }    
