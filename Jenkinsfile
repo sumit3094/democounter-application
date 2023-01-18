@@ -34,7 +34,6 @@ pipeline {
                 }
             }
        }
-           
        stage('Static code analysis'){
             steps{
                 script{
@@ -49,6 +48,13 @@ pipeline {
                         }
                 }
             }
-       }   
+       }
+       stage('Quality Gate Status'){
+           steps{
+              script{
+                   waitForQualityGate abortPipeline: false, credentialsId: 'latest-sonar'
+                    }
+                }
+	   }//stage
     }
 }    
