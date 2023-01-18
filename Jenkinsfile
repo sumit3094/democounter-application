@@ -8,8 +8,8 @@ pipeline {
         imageName = "democounter"
         registryCredential = 'mydockerhub'
         registry = "sumit3094/jenkins-demo"
-        dockerImage = ''
-	    
+        dockerImage = ''   
+	DOCKERHUB_CREDENTIALS= credentials('mydockerhub')
     }		
     stages {
         stage('Git Checkout') {
@@ -20,7 +20,7 @@ pipeline {
             }
         }  
        
-		stage('Docker build'){
+	stage('Docker build'){
            steps{
                 script{
 	            sh "pwd"
@@ -28,9 +28,10 @@ pipeline {
                 }
             }
         }//stage
-		stage('DockerHub Login') {
+	stage('DockerHub Login') {
         	steps {
-        	   sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+        	   sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+		   echo 'Login Completed' 
       		}
     	}
 	stage('Push Image'){
