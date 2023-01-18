@@ -64,15 +64,15 @@ pipeline {
 		     dockerImage = docker.build registry + ":$BUILD_NUMBER"
                 }
             }
-        }//stage
-	stage('Push Image'){
-		steps{
-                	script {
-             	    		docker.withRegistry( '', registryCredential ) { 
-                    		dockerImage.push()
-				}
-               		}
-		}
+       }//stage
+       stage('Push Image'){
+       	    steps{
+               	script{
+		     docker.withRegistry( '', registryCredential ) { 
+                     dockerImage.push()
+		     }
+               	}
+	    }
 	}//stage
 	stage('Software Composition Analysis'){
             steps {
