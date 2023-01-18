@@ -8,7 +8,8 @@ pipeline {
         imageName = "democounter"
         registryCredential = 'mydockerhub'
         registry = "sumit3094/jenkins-demo"
-        dockerImage = ''    
+        dockerImage = ''
+	    
     }		
     stages {
         stage('Git Checkout') {
@@ -35,7 +36,8 @@ pipeline {
 	stage('Push Image'){
 	   steps{
                 script {
-             	    docker.withRegistry([url: "", registryCredential]) {
+             	    //docker.withRegistry([url: "", registryCredential]) {
+		    withDockerRegistry([ credentialsId: "mydockerhub", url: "" ])
                     dockerImage.push(customeImage)
           	    }
                }
