@@ -5,7 +5,7 @@ pipeline {
     tools {
         maven 'mavenlatest'
         jdk 'javademo'
-	docker 'docker-tool'
+	//docker 'docker-tool'
     }
     environment{
         imageName = "democounter"
