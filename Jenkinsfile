@@ -65,6 +65,13 @@ pipeline {
                 }
             }
        }//stage
+       stage('Container Security Diagnosis'){
+       	   steps{
+               	script{
+		      sh "dockle $registry:$BUILD_NUMBER"
+       		}
+	   }
+       }	       
        stage('Push Image'){
        	    steps{
                	script{
