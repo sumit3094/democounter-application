@@ -71,7 +71,7 @@ pipeline {
                 }
             }
        }//stage
-       stage('Container Security Diagnosis'){
+       stage('Image Scanning'){
        	   steps{
                	script{
 		      sh "trivy image $registry:$BUILD_NUMBER"
