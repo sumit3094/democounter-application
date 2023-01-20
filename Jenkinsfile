@@ -74,7 +74,8 @@ pipeline {
        stage('Image Scanning'){
        	   steps{
                	script{
-		      sh "trivy image $registry:$BUILD_NUMBER"
+		      //sh "trivy image $registry:$BUILD_NUMBER"
+			sh "trivy image --format json --output result.json"
        		}
 	   }
        }	
@@ -106,6 +107,7 @@ pipeline {
         		always {
            		//dependencyCheckPublisher pattern: 'dependency-check-report.xml'
             		archiveArtifacts artifacts: 'dependency-check-report.json', onlyIfSuccessful: true
+			archiveArtifacts artifacts: 'result.json', onlyIfSuccessful: true
         		}
     		}
 }//pipeline
