@@ -61,7 +61,6 @@ pipeline {
             steps {
                 waitForQualityGate abortPipeline: true
             }
-       }
        }//stage
        stage('Docker build'){
             steps{
