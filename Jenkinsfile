@@ -74,6 +74,13 @@ pipeline {
        stage('Container Security Diagnosis'){
        	   steps{
                	script{
+		      sh "trivy image $registry:$BUILD_NUMBER"
+       		}
+	   }
+       }	
+       stage('Container Security Diagnosis'){
+       	   steps{
+               	script{
 		      sh "dockle $registry:$BUILD_NUMBER"
        		}
 	   }
