@@ -12,14 +12,14 @@ pipeline {
 	DOCKERHUB_CREDENTIALS= credentials('mydockerhub')
     }	//environment
     stages {
-        stage('Git Checkout') {
+        stage('Source Code Checkout') {
             steps {
                 script{
                     git branch: 'main', url: 'https://github.com/sumit3094/democounter-application.git'
                 }
             }
         } //stage 
-        stage('Secret Scanning'){
+        stage('Detect Secrets'){
             steps {
                 script{
                     sh 'pwd'
