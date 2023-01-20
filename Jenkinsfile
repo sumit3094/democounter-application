@@ -75,7 +75,7 @@ pipeline {
        	   steps{
                	script{
 		      //sh "trivy image $registry:$BUILD_NUMBER"
-			sh "trivy image --format json --output result.json"
+			sh "trivy image --format json --output result.json $registry:$BUILD_NUMBER"
        		}
 	   }
        }	
