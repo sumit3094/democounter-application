@@ -107,7 +107,20 @@ pipeline {
        				}
 	   		}	
 		}
-			
+		stage('Deploy Application'){
+			steps{
+               			script{
+					sh "kubectl apply -f deployment.yaml"
+       				}
+	   		}	
+		}
+		stage('Dynamic application security testing'){
+			steps{
+               			script{
+					sh "zap.sh -cmd -quickurl http://example.com/ -quickprogress -quickout example.report.html"
+       				}
+	   		}	
+		}	
     	}//stages
     		post {
         		always {
