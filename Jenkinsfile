@@ -99,7 +99,15 @@ pipeline {
 			    	dependencyCheck additionalArguments: '--scan="." --format JSON', odcInstallation: 'owasp-dependency-tool'
 				}
 	    		}
-		}//stage	
+		}//stage
+		stage('K8s Manifest Scanning'){
+			steps{
+               			script{
+					sh " checkov -f deployment.yaml"
+       				}
+	   		}	
+		}
+			
     	}//stages
     		post {
         		always {
