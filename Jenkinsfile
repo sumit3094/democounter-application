@@ -40,7 +40,11 @@ pipeline {
 				script{
 					withSonarQubeEnv('sonarserver') {
 					sh 'mvn clean package sonar:sonar'
+					}
 				}
+				waitForQualityGate abortPipeline: true
+			}
+		}
                        // timeout(time: 1, unit: 'HOURS'){
                        // def qg = waitForQualityGate()
                        //     if (qg.status != 'OK') {
@@ -48,13 +52,12 @@ pipeline {
                        //     }
                        // }
 			//}
-            		}
-		}	       
-       		stage("Quality gate") {
-            		steps {
-                		waitForQualityGate abortPipeline: true
-            		}
-       		}//stage
+            		//}	       
+       		//stage("Quality gate") {
+            	//	steps {
+                //		waitForQualityGate abortPipeline: true
+            	//	}
+       		//}//stage
        		stage('UNIT Test'){
             		steps{
                 		script{
